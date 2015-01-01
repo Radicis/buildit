@@ -8,6 +8,10 @@ urlpatterns = patterns('',
 	url(r'^addrow/(?P<page_id>\d+)/$', 'website.views.addRow'),
 	url(r'^addcol/(?P<row_id>\d+)/$', 'website.views.addCol'),
 	url(r'^addCode/(?P<column_id>\d+)/$', 'website.views.addCode'),
+	
+	#temporary
+	url(r'^addCode2/(?P<column_id>\d+)/$', 'website.views.addCode2'),
+	
 	#deletions
 	url(r'^delrow/(?P<row_id>\d+)/$', 'website.views.deleteRow'),
 	url(r'^delcol/(?P<column_id>\d+)/$', 'website.views.deleteCol'),

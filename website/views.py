@@ -67,6 +67,14 @@ def addCode(request, column_id=1):
 	col.save()
 	return HttpResponseRedirect('/')
 	
+def addCode2(request, column_id=1):
+	col = Column.objects.get(id=column_id)
+	code = Code.objects.all()
+	code = code[1]
+	col.html.add(code)
+	col.save()
+	return HttpResponseRedirect('/')
+	
 def delCode(request, column_id=1):
 	col = Column.objects.get(id=column_id)
 	col.html.clear()

@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,39 +7,72 @@
         <title>{{ page.title }}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="{% static "css/main.css" %}">
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+		<div class="wrapper">
 		
-		{% if page %}
+			<header>
+				<h2 class="logo">BuildIt - Build some shit</h2>
+				<nav>
+					<ul>
+						<li><a href="">New</a></li>
+						<li><a href="">Reset</a></li>
+						<li><a href="">Preview</a></li>
+					</ul>
+				</nav>
+			</header>
+		
+			<div class="snippets">
+				Snippets
+				<ul>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+				</ul>
+			</div>
+		
+			<div class="page-container">
+			
+				{% if page %}
 
-			<p>{{ page.title }} - Page id = {{ page.id }}</p>
-			
-			{% for row in page.rows.all %}
-			<p>
-					<a href="/delrow/{{ row.id }}">Del Row</a> | <a href="/addcol/{{ row.id }}">Add Column</a>
-									<table border="1" width="100%">
-				<tr>
+					<h2>Page title: {{ page.title }}</h2>
 					
-				{% for column in row.columns.all %}
-					<td>
-						<a href="/delcol/{{ column.id }}">Del Col</a> | <a href="/addCode/{{ column.id }}">Add Code</a> | <a href="/delCode/{{ column.id }}">Del Code</a>
-					{% for html in column.html.all %}
-						{{ html.html|safe }}
+					{% for row in page.rows.all %}
+					<p>
+							<a href="/delrow/{{ row.id }}">Del Row</a> | <a href="/addcol/{{ row.id }}">Add Column</a>
+						<table class="arow">
+						<tr>
+							
+						{% for column in row.columns.all %}
+							<td>
+								<a href="/delcol/{{ column.id }}">Del Col</a> 
+								 | <a href="/addCode/{{ column.id }}">Add Code</a>	|<a href="/addCode2/{{ column.id }}">Add Code2</a>						
+							{% for html in column.html.all %}
+								{{ html.html|safe }}<a href="/delCode/{{ column.id }}">Del Code</a>
+							{% endfor %}
+							</td>
+						{% endfor %}
+						</tr>
+						</table>
+						</p>
 					{% endfor %}
-					</td>
-				{% endfor %}
-				</tr>
-				</table>
-				</p>
-			{% endfor %}
+					
+					<a href="/addrow/{{ page.id }}">Add Row</a>
+				{% else %}
+					<h2>Welcome to BuildIt</h2>
+					<a href="createPage/">Make Page</a>
+				{% endif %}
+				
+			</div>
 			
-			<a href="/addrow/{{ page.id }}">Add Row</a>
-		{% else %}
-			<h2>Welcome to BuildIt</h2>
-			<a href="createPage/">Make Page</a>
-		{% endif %}
+		</div>
     </body>
 </html>

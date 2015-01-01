@@ -1,0 +1,137 @@
+@import URL(reset.css);
+
+@import "http://fonts.googleapis.com/css?family=Open+Sans:400,700,300";
+
+
+/* temporary styling */
+
+table{
+	width:100%;
+	border:1px solid #999;
+	padding:10px;
+}
+
+table td{
+	padding:10px;
+	border:1px solid #999;
+}
+
+
+/* --- Global Rules -- */
+
+html {
+	margin:0;
+	padding:0
+}
+
+body {
+	font-size:14px;
+	font-family:'Open Sans',sans-serif;
+	font-weight:400;
+	color:#9197A3;
+	background-color:#E9EAED
+}
+
+.hidden {
+	display:none
+}
+
+.clear-fix {
+	clear:both
+}
+
+.right {
+	float:right
+}
+
+.left {
+	float:left
+}
+
+a {
+	text-decoration:none;
+	color:#3A6BFF
+}
+
+a:focus {
+	outline:0
+}
+
+a:hover {
+	text-decoration:underline
+}
+
+h1,h2,h3 {
+	padding:0;
+	margin:0
+}
+
+h1 {
+	font-size:2em
+}
+
+h2 {
+	font-size:1.5em
+}
+
+h3 {
+	font-size:1.2em
+}
+
+/* --- Main container --- */
+#wrapper {
+	width:100%;
+	margin:auto
+}
+
+/* --- Header --- */
+
+header{
+	border-bottom:1px solid #999;
+	height:40px;
+	margin-bottom:10px;
+	padding:20px;
+}
+
+header .logo{
+	float:left;
+}
+
+header nav ul{
+	float:left;
+	list-style:none;
+	display:block;
+	overflow:auto;
+	line-height:10px;
+}
+
+header nav ul li{
+	float:left;
+	margin-right:10px;
+}
+
+
+/* --- Snippets menu --- */
+
+.snippets{
+	width:150px;
+	display:block;	
+	height:100%;
+	float:left;
+	padding:10px;
+}
+
+/* --- Center main content --- */
+
+.page-container{
+	margin-left:150px;
+	margin-right:20px;
+	padding:20px;
+	background-color:#fefefe;
+	border:1px solid #999;
+}
+
+/* --- footer styling --- */
+
+
+/* --- Media Queries --- */
