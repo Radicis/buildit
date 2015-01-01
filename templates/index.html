@@ -15,18 +15,29 @@
 		{% if page %}
 
 			<p>{{ page.title }} - Page id = {{ page.id }}</p>
+			
 			{% for row in page.rows.all %}
-				<p>Row {{ row.id }} <a href="delrow/{{ row.id }}">Delete Row</a> | <a href="addcol/{{ row.id }}">Add Column</a><br>
+			<p>
+					<a href="/delrow/{{ row.id }}">Del Row</a> | <a href="/addcol/{{ row.id }}">Add Column</a>
+									<table border="1" width="100%">
+				<tr>
+					
 				{% for column in row.columns.all %}
-					Column {{ column.id }} <a href="delcol/{{ column.id }}">Delete Col</a>
+					<td>
+						<a href="/delcol/{{ column.id }}">Del Col</a> | <a href="/addCode/{{ column.id }}">Add Code</a> | <a href="/delCode/{{ column.id }}">Del Code</a>
 					{% for html in column.html.all %}
 						{{ html.html|safe }}
 					{% endfor %}
+					</td>
 				{% endfor %}
+				</tr>
+				</table>
 				</p>
 			{% endfor %}
-			<a href="addrow/{{ page.id }}">Add Row</a>
+			
+			<a href="/addrow/{{ page.id }}">Add Row</a>
 		{% else %}
+			<h2>Welcome to BuildIt</h2>
 			<a href="createPage/">Make Page</a>
 		{% endif %}
     </body>

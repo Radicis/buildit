@@ -53,12 +53,32 @@ def addCol(request, row_id=1):
 def deleteCol(request, column_id=1):
 	col = Column.objects.get(id=column_id)
 	col.delete()
-	return HttpResponseRedirect('/')	
+	return HttpResponseRedirect('/')
+
+def addCode(request, column_id=1):
+	col = Column.objects.get(id=column_id)
+	code = Code.objects.all()
+	code = code[0]
+	#allow adding duplicate code items in column. may not work
+	#if code in col.html.all():
+	#	code2 = code
+	#	col.html.add(code2)
+	col.html.add(code)
+	col.save()
+	return HttpResponseRedirect('/')
+	
+def delCode(request, column_id=1):
+	col = Column.objects.get(id=column_id)
+	col.html.clear()
+	return HttpResponseRedirect('/')
 
 def home(request):
 	
 	page = Page.objects.all()
 	
-	page = page[0]
+	if page[0]:
+		page = page[0]
+	else:
+		page = createPage()		
 	
 	return render(request, 'index.html', {'page':page})
