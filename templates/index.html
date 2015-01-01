@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{{ page.title }}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+		
+		{% if page %}
+
+			<p>{{ page.title }} - Page id = {{ page.id }}</p>
+			{% for row in page.rows.all %}
+				<p>Row {{ row.id }} <a href="delrow/{{ row.id }}">Delete Row</a> | <a href="addcol/{{ row.id }}">Add Column</a><br>
+				{% for column in row.columns.all %}
+					Column {{ column.id }} <a href="delcol/{{ column.id }}">Delete Col</a>
+					{% for html in column.html.all %}
+						{{ html.html|safe }}
+					{% endfor %}
+				{% endfor %}
+				</p>
+			{% endfor %}
+			<a href="addrow/{{ page.id }}">Add Row</a>
+		{% else %}
+			<a href="createPage/">Make Page</a>
+		{% endif %}
+    </body>
+</html>
