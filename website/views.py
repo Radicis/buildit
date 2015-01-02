@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from models import Page, Row, Column, Code
 
 #Return a blank row with 1 column
@@ -41,20 +41,22 @@ def deleteRow(request, row_id=1):
 	row.delete()
 	return HttpResponseRedirect('/')
 
-def addCol(request, row_id=1):
+def addCol(request, row_id=1):	
 	row = Row.objects.get(id=row_id)
-	column = Column(rel_row=row)	
-	column.save()	
-	row.columns.add(column)
-	row.type += 1
-	row.save()
+	if row.type < 4:
+		column = Column(rel_row=row)	
+		column.save()	
+		row.columns.add(column)
+		row.type += 1
+		row.save()
 	
 	return HttpResponseRedirect('/')
 	
 def deleteCol(request, column_id=1):
 	col = Column.objects.get(id=column_id)
 	row = Row.objects.get(id=col.rel_row.id)
-	row.type -= 1
+	if row.type > 1:
+		row.type -= 1
 	row.save()
 	col.delete()
 	return HttpResponseRedirect('/')
@@ -90,6 +92,10 @@ def reset(request):
 			row.delete()
 	return HttpResponseRedirect('/')
 
+def preview(request, page_id=1):
+	page = Page.objects.get(id=page_id)
+	return render(request, 'preview.html', {'page':page})
+	
 def home(request):
 	
 	page = Page.objects.all()

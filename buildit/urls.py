@@ -20,5 +20,8 @@ urlpatterns = patterns('',
 	#reset
 	url(r'^reset/$', 'website.views.reset'),
 	
+	#preview
+	url(r'^preview/(?P<page_id>\d+)/$', 'website.views.preview'),
+	
     url(r'^admin/', include(admin.site.urls)),
 )
