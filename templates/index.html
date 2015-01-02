@@ -20,7 +20,7 @@
 				<nav>
 					<ul>
 						<li><a href="">New</a></li>
-						<li><a href="">Reset</a></li>
+						<li><a href="/reset/">Reset</a></li>
 						<li><a href="">Preview</a></li>
 					</ul>
 				</nav>
@@ -43,29 +43,31 @@
 			
 				{% if page %}
 
-					<h2>Page title: {{ page.title }}</h2>
+					<h2>{{ page.title }}</h2>
+					<p><a href="/addrow/{{ page.id }}">Add Row</a></p>
 					
 					{% for row in page.rows.all %}
-					<p>
-							<a href="/delrow/{{ row.id }}">Del Row</a> | <a href="/addcol/{{ row.id }}">Add Column</a>
-						<table class="arow">
-						<tr>
-							
-						{% for column in row.columns.all %}
-							<td>
-								<a href="/delcol/{{ column.id }}">Del Col</a> 
-								 | <a href="/addCode/{{ column.id }}">Add Code</a>	|<a href="/addCode2/{{ column.id }}">Add Code2</a>						
-							{% for html in column.html.all %}
-								{{ html.html|safe }}<a href="/delCode/{{ column.id }}">Del Code</a>
-							{% endfor %}
-							</td>
-						{% endfor %}
-						</tr>
-						</table>
-						</p>
-					{% endfor %}
+						<a href="/delrow/{{ row.id }}">Del Row</a> | <a href="/addcol/{{ row.id }}">Add Column</a>
+						<div class="row">
+							{% for column in row.columns.all %}							
+								{% if row.type == 1 %}
+									<div class="col-1">
+								{% elif row.type == 2 %}
+									<div class="col-2">
+								{% elif row.type == 3 %}
+									<div class="col-3">
+								{% elif row.type == 4 %}
+									<div class="col-4">
+								{% endif %}
+										<a href="/delcol/{{ column.id }}">Del Col</a> | <a href="/addCode/{{ column.id }}">Add Code</a>	|<a href="/addCode2/{{ column.id }}">Add Code2</a>						
+										{% for html in column.html.all %}
+											{{ html.html|safe }}<a href="/delCode/{{ column.id }}">Del Code</a>
+										{% endfor %}
+								</div>
+							{% endfor %}								
+						</div>
+					{% endfor %}					
 					
-					<a href="/addrow/{{ page.id }}">Add Row</a>
 				{% else %}
 					<h2>Welcome to BuildIt</h2>
 					<a href="createPage/">Make Page</a>

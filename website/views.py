@@ -46,12 +46,16 @@ def addCol(request, row_id=1):
 	column = Column(rel_row=row)	
 	column.save()	
 	row.columns.add(column)
+	row.type += 1
 	row.save()
 	
 	return HttpResponseRedirect('/')
 	
 def deleteCol(request, column_id=1):
 	col = Column.objects.get(id=column_id)
+	row = Row.objects.get(id=col.rel_row.id)
+	row.type -= 1
+	row.save()
 	col.delete()
 	return HttpResponseRedirect('/')
 
@@ -78,6 +82,12 @@ def addCode2(request, column_id=1):
 def delCode(request, column_id=1):
 	col = Column.objects.get(id=column_id)
 	col.html.clear()
+	return HttpResponseRedirect('/')
+	
+def reset(request):
+	for page in Page.objects.all():
+		for row in page.rows.all():
+			row.delete()
 	return HttpResponseRedirect('/')
 
 def home(request):

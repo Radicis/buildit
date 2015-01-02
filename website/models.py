@@ -8,6 +8,7 @@ class Column(models.Model):
 	rel_row = models.ForeignKey('Row', null=True)
 
 class Row(models.Model):
+	type = models.IntegerField(default=1)
 	columns = models.ManyToManyField(Column, null=True)
 	rel_page = models.ForeignKey('Page', null=True)
 

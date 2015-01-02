@@ -17,5 +17,8 @@ urlpatterns = patterns('',
 	url(r'^delcol/(?P<column_id>\d+)/$', 'website.views.deleteCol'),
 	url(r'^delCode/(?P<column_id>\d+)/$', 'website.views.delCode'),
 	
+	#reset
+	url(r'^reset/$', 'website.views.reset'),
+	
     url(r'^admin/', include(admin.site.urls)),
 )
